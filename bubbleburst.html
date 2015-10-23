@@ -31,9 +31,10 @@
 	  }
 
 	  function createBubble(x, y)
- 	  {
+	  {
+		  var container =  new PIXI.Container();
 		  var bubble = new PIXI.Sprite(texture);
-
+		  var tweet = new PIXI.Text('Tweet', { font: 'bold italic 20px Arvo', fill: '#FFFFFF', align: 'center', stroke: '#000000', strokeThickness: 7 });
 		  bubble.interactive = true;
 		  bubble.buttonMode = true;
 
@@ -44,17 +45,19 @@
 
 		  bubble.position.x = x;
 		  bubble.position.y = y;
-
-		  stage.addChild(bubble);
+		  container.addChild(bubble);
+		  bubble.addChild(tweet);
+		  stage.addChild(container);
 	  }
 
 	  function onClick(event)
 	  {
 	  	this.data = event.data;
-	  	this.visible = 0;
-  		this.visible = 0;
+		this.visible = 0;
+		this.visible = 0;
+		console.log(this);
+
 		score.text = 'SCORE: ' + count++;
-	  	event.destroy();
 	  }
 	  animate();
 
