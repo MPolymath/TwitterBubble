@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<style>
+	body {
+	margin: 0;
+	padding: 0;
+	background-color: #000000;
+	}
+	</style>
+	<script src="pixi.js"></script>
+  </head>
+  <body>
+	<script>
+	  var renderer = PIXI.autoDetectRenderer(1400, 1200);
+	  document.body.appendChild(renderer.view);
+
+	  // create the root of the scene graph
+	  var stage = new PIXI.Container();
+
+	  // create some white text using the Snippet webfont
+	  var string = "asdfghjklqwertasdfghjklqwertasdfghjklqwertasdfghjklqwertasdfghjklqwertasdfghjklqwertasdfghjklqwertasdfghjklqwertasdfghjklqwert";
+	  var textSample;
+
+	  for (var i = 14; i < (10 * 14); i+=14){
+
+		  string = string.substring(0, i) + "\n" + string.substr(i);
+	  }
+	  textSample = new PIXI.Text(string, { font: '34px Snippet', fill: 'white', align: 'center' });
+	  textSample.position.set(20);
+	  stage.addChild(textSample);
+	  requestAnimationFrame(animate);
+
+	  function animate() {
+
+	  renderer.render(stage);
+
+	  requestAnimationFrame(animate);
+	  }
+	</script>
+  </body>
+</html>
