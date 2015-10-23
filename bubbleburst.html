@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<style>
+	body {
+	margin: 0;
+	padding: 0;
+	background-color: #000000;
+	}
+	</style>
+	<script src="pixi.js"></script>
+  </head>
+  <body>
+	<script>
+	  var renderer = PIXI.autoDetectRenderer(800, 600, {backgroundColor: 0x1099bb});
+	  document.body.appendChild(renderer.view);
+
+	  // create the root of the scene graph
+	  var stage = new PIXI.Container();
+	  var texture = PIXI.Texture.fromImage('bubble.png');
+	  var bubble = new PIXI.Sprite(texture);
+
+	  bubble.interactive = true;
+//	  bubble.buttonMode = true;
+	  bubble.anchor.set(0.5);
+	  bubble.scale.set(.5);
+	  bubble.position.x = 400;
+	  bubble.position.y = 300;
+
+	  bubble.on('click', onClick);
+	  stage.addChild(bubble);
+
+	  // run the render loop
+	  function onClick(event)
+	  {
+	  	this.data = event.data;
+	  	this.visible = 0;
+  	    this.visible = 0;
+	  	event.destroy();
+	  }
+	  animate();
+
+	  function animate() {
+
+	  requestAnimationFrame( animate );
+	  renderer.render(stage);
+	  }
+	</script>
+  </body>
+</html>
