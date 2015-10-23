@@ -5505,7 +5505,7 @@ function Graphics()
     this.boundsDirty = true;
 
     /**
-     * Used to detect if the cached sprite object needs to be updated.
+//   Updated: 2015/10/23 17:12:53 by mdiouf           ###   ########.fr       //
      *
      * @member {boolean}
      * @private
