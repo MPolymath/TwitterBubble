@@ -18,19 +18,30 @@
 	  // create the root of the scene graph
 	  var stage = new PIXI.Container();
 	  var texture = PIXI.Texture.fromImage('bubble.png');
-	  var bubble = new PIXI.Sprite(texture);
 
-	  bubble.interactive = true;
-//	  bubble.buttonMode = true;
-	  bubble.anchor.set(0.5);
-	  bubble.scale.set(.5);
-	  bubble.position.x = 400;
-	  bubble.position.y = 300;
+	  for (var i = 0; i < 10; i++)
+	  {
+		  createBubble(Math.floor(Math.random() * 800) , Math.floor(Math.random() * 600));
+	  }
 
-	  bubble.on('click', onClick);
-	  stage.addChild(bubble);
+	  function createBubble(x, y)
+ 	  {
+		  var bubble = new PIXI.Sprite(texture);
 
-	  // run the render loop
+		  bubble.interactive = true;
+		  bubble.buttonMode = true;
+
+		  bubble.anchor.set(0.5);
+		  bubble.scale.set(0.5);
+
+		  bubble.on('click', onClick);
+
+		  bubble.position.x = x;
+		  bubble.position.y = y;
+
+		  stage.addChild(bubble);
+	  }
+
 	  function onClick(event)
 	  {
 	  	this.data = event.data;
