@@ -13,9 +13,10 @@ io.on('connection', function(socket){
 	//	});
 	socket.on('chat message', function(msg){
 		console.log('message: ' +msg);
+		io.emit('chat message', msg);
 	});
 });
 
-http.listen(4000, function(){
-	console.log('listening on *:4000');
+http.listen(5000, function(){
+	console.log('listening on *:5000');
 });
