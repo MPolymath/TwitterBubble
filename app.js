@@ -5,7 +5,7 @@ var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
-var Twitter = require('twitter-js-client').Twitter;
+//var Twitter = require('twitter-js-client').Twitter;
 //  app instance
 var app = express();
 var mongoose = require('mongoose');
@@ -16,6 +16,21 @@ var configDB = require('./routes/database.js');
 //  Connect db
 var db = mongoose.connect(configDB.url, {auth:{authdb:"admin"}});
 var url = require('url');
+//var Twitter = require('twitter');
+
+/*var client = new Twitter({
+	consumer_key: '9BHeLsq2NTO2kPZKBSkcLm5No',
+	consumer_secret: 'SAwsJ6odkwu0efTZ0v7LOCd6uJtWFZA5Wr6Y93q5qRK3ibFNDk',
+	access_token_key: '3012074284-EqTcnHDMlEuP7fxF3XMSATQWRHteK3XVNOHiqOJ',
+	access_token_secret: 'D1OQ40XjGsd0tUfo1qOfnLNSaJh0foFg2Xio8pVlRks7s'
+});
+
+	client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
+		stream.on('data', function(tweet) {
+//			socket.emit('chat message', tweet.txt);
+			console.log('tweet: ' + tweet.text);
+		});
+		});*/
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,8 +41,8 @@ app.set('view engine', 'ejs');
 //app.use(favicon(__dirname + '/public/favicon.ico'))
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'TwitterBubble')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'TwitterBubble/Socket')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -41,7 +56,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
-require('./routes/passport.js')(passport, Twitter); // pass passport for configuration
+require('./routes/passport.js')(passport); // pass passport for configuration
 // routes
 require('./routes/routes.js')(app, passport); // connects routes and configured passport
 
