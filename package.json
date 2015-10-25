@@ -1,0 +1,15 @@
+{
+  "name": "Twitter-Bubble",
+  "version": "0.0.1",
+  "description": "My first pixi app",
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "express": "^4.10.2",
+    "jquery": "^2.1.4",
+    "twitter": "^1.2.5",
+	"debug": "~2.1.1",
+    "nodemon": "~1.7.1"
+  }
+}

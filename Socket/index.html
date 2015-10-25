@@ -13,13 +13,13 @@
   <body>
 	<script>
 	  var socket = io();
-	  var renderer = PIXI.autoDetectRenderer(800, 600, {backgroundColor: 0x1099bb});
+	  var renderer = PIXI.autoDetectRenderer(800, 600, {backgroundColor: 0xb3eaff});
 	  document.body.appendChild(renderer.view);
 
 	  var stage = new PIXI.Container();
 	  var texture = PIXI.Texture.fromImage('bubble.png');
 	  var count = 1;
-	  var score = new PIXI.Text('SCORE: 0', { font: 'bold italic 60px Arvo', fill: '#3e1707', align: 'center', stroke: '#a4410e', strokeThickness: 7 });
+	  var score = new PIXI.Text('SCORE: 0', { font: 'bold 60px Avro', fill: '#15b659', align: 'center', stroke: '#333333', strokeThickness: 7 });
 
 	  score.position.x = 400;
 	  score.position.y = 500;
@@ -28,6 +28,9 @@
 
 	  createBubble(Math.floor(Math.random() * 800) , Math.floor(Math.random() * 600), 'Tweets will load in real time');
 	  socket.on('chat message', function(msg){
+	  		for (var i = 28; i < (140); i+=28){
+		  		msg = msg.substring(0, i) + "\n" + msg.substr(i);
+	  		}
 		 	createBubble(Math.floor(Math.random() * 800) , Math.floor(Math.random() * 600), msg);
 	  });
 
