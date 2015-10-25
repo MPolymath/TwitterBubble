@@ -1,11 +1,11 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/Socket')));
+
 app.use(function(req, res, next) {
 	res.status(404).send('Not Found');
 });

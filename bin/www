@@ -22,37 +22,22 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
- * Get twitter module to stream tweetss
- */
-
-var Twitter = require('twitter');
-
-/**
- * Get socket module to stream pipe browser and server
+ * Get socket module to pipe browser(client) and server
  */
 
 var io = require('socket.io')(server);
 
 /**
- * Twitter app credentials
+ * Call configuration file for tweets to filter
  */
 
-var client = new Twitter({
-	consumer_key: '9BHeLsq2NTO2kPZKBSkcLm5No',
-	consumer_secret: 'SAwsJ6odkwu0efTZ0v7LOCd6uJtWFZA5Wr6Y93q5qRK3ibFNDk',
-	access_token_key: '3012074284-EqTcnHDMlEuP7fxF3XMSATQWRHteK3XVNOHiqOJ',
-	access_token_secret: 'D1OQ40XjGsd0tUfo1qOfnLNSaJh0foFg2Xio8pVlRks7s'
-});
+var tweetInfo = require('../config.js');
 
 /**
- * Define action on tweet matching
+ * Call streaming function
  */
-		client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
-		stream.on('data', function(tweet) {
-//			socket.emit('chat message', tweet.txt);
-			console.log('tweet: ' + tweet.text);
-			io.emit('chat message', tweet.text);
-		})});
+
+tweetInfo(io);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -61,7 +46,6 @@ var client = new Twitter({
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-//server.on('tweet', onTweet);
 console.log('This is where the magic happens ' + port);
 
 /**
@@ -96,6 +80,3 @@ function onListening() {
   debug('Listening on port ' + server.address().port);
 }
 
-//function onTweet() {
-//  debug('Listening on port ' + server.address().port);
-//}
