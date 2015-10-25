@@ -17,15 +17,17 @@
 	  document.body.appendChild(renderer.view);
 
 	  var stage = new PIXI.Container();
-	  var texture = PIXI.Texture.fromImage('bubble.png');
+	  var bg = PIXI.Sprite.fromImage('img/bathroom.jpg');
+	  var texture = [PIXI.Texture.fromImage('img/bubble.png'), PIXI.Texture.fromImage('img/bubble2.png')];
 	  var count = 1;
 	  var score = new PIXI.Text('SCORE: 0', { font: 'bold 60px Avro', fill: '#15b659', align: 'center', stroke: '#333333', strokeThickness: 7 });
 
 	  score.position.x = 400;
 	  score.position.y = 500;
 	  score.anchor.x = 0.5;
-	  stage.addChild(score);
 
+	  stage.addChild(bg);
+	  stage.addChild(score);
 	  createBubble(Math.floor(Math.random() * 800) , Math.floor(Math.random() * 600), 'Tweets will load in real time');
 	  socket.on('chat message', function(msg){
 	  		for (var i = 28; i < (140); i+=28){
@@ -35,10 +37,11 @@
 	  });
 
 	  function createBubble(x, y, text)
-	  {
+		{
+		  var textNumber = (Math.floor(Math.random() * 2));
 		  var container =  new PIXI.Container();
-		  var bubble = new PIXI.Sprite(texture);
-		  var tweet = new PIXI.Text(text, { font: 'bold italic 20px Arvo', fill: '#FFFFFF', align: 'left', stroke: '#000000', strokeThickness: 7 });
+		  var bubble = new PIXI.Sprite(texture[textNumber]);
+		  var tweet = new PIXI.Text(text, { font: 'bold 22px Ubuntu', fill: '#FFFFFF', align: 'left', stroke: '#000000', strokeThickness: 7 });
 		  bubble.interactive = true;
 		  bubble.buttonMode = true;
 
