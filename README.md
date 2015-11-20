@@ -9,4 +9,4 @@ Launching step:
 2. In current directory type command: npm install
 3. In current directory type command: npm start
 4. In browser type localhost:3000/index.html
-5. Configure config.js in order to change parameter
+5. Configure config.js in order to change parameter (Set KEYS apps.twitter.com)
